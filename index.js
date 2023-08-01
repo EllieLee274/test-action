@@ -41,9 +41,10 @@ async function run() {
 
     const branchOrRef = branch ? `--branch ${branch}` : `--ref ${ref}`;
 
-    const envFlag = env ? `--env ${env}` : undefined;
+    const envFlag = env ? `--env ${env}` : "";
 
     await _exec(`altitude deploy --site ${siteName} ${branchOrRef} ${envFlag}`);
+    process.exit();
   } catch (error) {
     setFailed(error.message);
   }
