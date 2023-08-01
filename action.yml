@@ -1,0 +1,16 @@
+---
+name: Deploy Using Altitude CLI
+description: Uses Altitude CLI to deploy a site
+inputs:
+  site-name:
+    description: Provide name of site to deploy
+    required: true
+  branch:
+    description: Provide branch which you would like to deploy from
+  ref:
+    description: The git ref to deploy from
+  env:
+    description: The environment to deploy to (if not provided branch name is used)
+runs:
+  using: node12
+  main: action/index.js
