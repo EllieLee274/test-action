@@ -4153,6 +4153,15 @@ async function run() {
     const clientSecret = process.env.CLIENT_SECRET;
     (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setSecret)(clientSecret);
 
+    if (!branch && !ref) {
+      throw new Error(
+        "You must include at least a branch or git ref for deployment source code"
+      );
+    }
+    if (!branch && !env) {
+      throw new Error("You must include an environment name to be deployed to");
+    }
+
     const ALTITUDE_DIR_LOCATION = `${os__WEBPACK_IMPORTED_MODULE_2__.homedir()}/.altitude`;
     const CREDENTIALS_LOCATION = `${ALTITUDE_DIR_LOCATION}/credentials`;
 
@@ -4169,19 +4178,15 @@ async function run() {
 
     await (0,_actions_exec__WEBPACK_IMPORTED_MODULE_1__.exec)(`yarn global add @thg-altitude/cli`);
 
-    if (!branch && !ref) {
-      throw new Error(
-        "You must include at least a branch or git ref for deployment source code"
-      );
-    }
-    if (!branch && !env) {
-      throw new Error("You must include an environment name to be deployed to");
-    }
     const branchOrRef = branch ? `--branch ${branch}` : `--ref ${ref}`;
 
-    const envFlag = env ? `--env ${env}` : undefined;
+    const envFlag = env ? `--env ${env}` : "";
 
-    await (0,_actions_exec__WEBPACK_IMPORTED_MODULE_1__.exec)(`altitude deploy --site ${siteName} ${branchOrRef} ${envFlag}`);
+    (0,_actions_exec__WEBPACK_IMPORTED_MODULE_1__.exec)(`altitude deploy --site ${siteName} ${branchOrRef} ${envFlag}`).then(
+      () => {
+        process.exit();
+      }
+    );
   } catch (error) {
     (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed)(error.message);
   }
