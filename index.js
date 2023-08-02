@@ -1,5 +1,5 @@
 import { getInput, setSecret, setFailed } from "@actions/core";
-import { exec as _exec } from "@actions/exec";
+import { exec } from "@actions/exec";
 import * as os from "os";
 import { promises as fs } from "fs";
 
@@ -37,14 +37,17 @@ async function run() {
 
     await writeAuthCreds({ client_id: clientId, secret_key: clientSecret });
 
-    await _exec(`yarn global add @thg-altitude/cli`);
+    await exec(`yarn global add @thg-altitude/cli`);
 
     const branchOrRef = branch ? `--branch ${branch}` : `--ref ${ref}`;
 
     const envFlag = env ? `--env ${env}` : "";
 
-    await _exec(`altitude deploy --site ${siteName} ${branchOrRef} ${envFlag}`);
-    process.exit();
+    await exec(
+      `altitude deploy --site ${siteName} ${branchOrRef} ${envFlag}`
+    ).then(() => {
+      process.exit();
+    });
   } catch (error) {
     setFailed(error.message);
   }
