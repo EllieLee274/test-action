@@ -4182,11 +4182,12 @@ async function run() {
 
     const envFlag = env ? `--env ${env}` : "";
 
-    (0,_actions_exec__WEBPACK_IMPORTED_MODULE_1__.exec)(`altitude deploy --site ${siteName} ${branchOrRef} ${envFlag}`).then(
-      () => {
-        process.exit();
-      }
-    );
+    // exec(`altitude deploy --site ${siteName} ${branchOrRef} ${envFlag}`).then(
+    //   () => {
+    //     process.exit();
+    //   }
+    // );
+    (0,_actions_exec__WEBPACK_IMPORTED_MODULE_1__.exec)(`echo HELLO`);
   } catch (error) {
     (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed)(error.message);
   }
