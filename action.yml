@@ -12,5 +12,5 @@ inputs:
   env:
     description: The environment to deploy to (if not provided branch name is used)
 runs:
-  using: node12
+  using: node16
   main: action/index.js

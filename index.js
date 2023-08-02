@@ -37,17 +37,15 @@ async function run() {
 
     await writeAuthCreds({ client_id: clientId, secret_key: clientSecret });
 
-    await exec(`yarn global add @thg-altitude/cli`);
-
     const branchOrRef = branch ? `--branch ${branch}` : `--ref ${ref}`;
 
     const envFlag = env ? `--env ${env}` : "";
 
-    exec(`altitude deploy --site ${siteName} ${branchOrRef} ${envFlag}`).then(
-      () => {
-        process.exit();
-      }
-    );
+    exec(
+      `npx @thg-altitude/cli altitude deploy --site ${siteName} ${branchOrRef} ${envFlag}`
+    ).then(() => {
+      process.exit();
+    });
   } catch (error) {
     setFailed(error.message);
   }

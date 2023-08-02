@@ -4176,17 +4176,15 @@ async function run() {
 
     await writeAuthCreds({ client_id: clientId, secret_key: clientSecret });
 
-    await (0,_actions_exec__WEBPACK_IMPORTED_MODULE_1__.exec)(`yarn global add @thg-altitude/cli`);
-
     const branchOrRef = branch ? `--branch ${branch}` : `--ref ${ref}`;
 
     const envFlag = env ? `--env ${env}` : "";
 
-    (0,_actions_exec__WEBPACK_IMPORTED_MODULE_1__.exec)(`altitude deploy --site ${siteName} ${branchOrRef} ${envFlag}`).then(
-      () => {
-        process.exit();
-      }
-    );
+    (0,_actions_exec__WEBPACK_IMPORTED_MODULE_1__.exec)(
+      `npx @thg-altitude/cli altitude deploy --site ${siteName} ${branchOrRef} ${envFlag}`
+    ).then(() => {
+      process.exit();
+    });
   } catch (error) {
     (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed)(error.message);
   }
