@@ -41,7 +41,7 @@ async function run() {
 
     const envFlag = env ? `--env ${env}` : "";
 
-    exec(
+    await exec(
       `npx @thg-altitude/cli altitude deploy --site ${siteName} ${branchOrRef} ${envFlag}`
     ).then(() => {
       process.exit();
