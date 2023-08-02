@@ -45,6 +45,7 @@ async function run() {
 
     exec(`altitude deploy --site ${siteName} ${branchOrRef} ${envFlag}`).then(
       () => {
+        console.log("finished");
         process.exit();
       }
     );
