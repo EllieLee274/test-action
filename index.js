@@ -43,12 +43,11 @@ async function run() {
 
     const envFlag = env ? `--env ${env}` : "";
 
-    // exec(`altitude deploy --site ${siteName} ${branchOrRef} ${envFlag}`).then(
-    //   () => {
-    //     process.exit();
-    //   }
-    // );
-    exec(`echo HELLO`);
+    exec(`altitude deploy --site ${siteName} ${branchOrRef} ${envFlag}`).then(
+      () => {
+        process.exit();
+      }
+    );
   } catch (error) {
     setFailed(error.message);
   }
